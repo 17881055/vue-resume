@@ -168,9 +168,12 @@ export default {
       const selectedFile = this.$refs.fileInput.files[0];
       var reader = new FileReader();
       reader.readAsText(selectedFile);
+      var _this = this;
       reader.onload = function() {
         let json = JSON.parse(this.result);
-        console.log(json);
+        _this.$refs["brief"].parseFromJson(json.brief);
+        _this.$refs["social"].parseFromJson(json.social);
+        _this.$refs["contact"].parseFromJson(json.contact);
       };
     },
     importJson() {

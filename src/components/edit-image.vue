@@ -43,6 +43,9 @@ export default {
     };
   },
   methods: {
+    parseFromJson(json) {
+      this.imgSrc = json.imgSrc;
+    },
     toJson() {
       var json = Object.create(null);
       json.imgSrc = this.imgSrc;

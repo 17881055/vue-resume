@@ -43,9 +43,21 @@ export default {
     EditImage
   },
   methods: {
+    parseFromJson(json) {
+      document.querySelector(".name").innerHTML = json.name;
+      document.querySelector(".job").innerHTML = json.job;
+      document.querySelector(".location-name").innerHTML = json.location;
+      document.querySelector(".sex").innerHTML = json.sex;
+      document.querySelector(".age").innerHTML = json.age;
+      document.querySelector(".degree").innerHTML = json.degree;
+      this.$children.map(item => {
+        if (item["parseFromJson"]) {
+          item.parseFromJson(json);
+        }
+      });
+    },
     toJson() {
       var json = Object.create(null);
-
       const name = document.querySelector(".name").innerHTML;
       const job = document.querySelector(".job").innerHTML;
       const location = document.querySelector(".location-name").innerHTML;

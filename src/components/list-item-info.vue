@@ -1,7 +1,7 @@
 <template>
   <ListItem class="list-item-info">
-    <EditImage :src="image" class="img"></EditImage>
-    <span contenteditable="true">{{ title }}</span>
+    <EditImage :src="dataImage" class="img"></EditImage>
+    <span contenteditable="true">{{ dataTitle }}</span>
   </ListItem>
 </template>
 <script>
@@ -23,11 +23,24 @@ export default {
       default: "github.com/luosijie"
     }
   },
+  data() {
+    return {
+      dataTitle: this.title,
+      dataImage: this.image
+    };
+  },
   methods: {
+    parseFromJson(json) {
+      this.dataTitle = this.dataImage = "";
+      this.$nextTick(() => {
+        this.dataImage = json.image;
+        this.dataTitle = json.title;
+      });
+    },
     toJson() {
       var json = Object.create(null);
-      json.image = this.image;
-      json.title = this.title;
+      json.image = this.dataImage;
+      json.title = this.dataTitle;
       return json;
     }
   }

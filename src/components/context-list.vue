@@ -1,14 +1,20 @@
 <template>
-  <div class="context-list" :class="{ 'icon-margin-bottom': icon }">
-    <div class="list-heading" :class="{ 'icon-class': icon }">
+  <div class="context-list" :class="{ 'icon-margin-bottom': iIcon }">
+    <div class="list-heading" :class="{ 'icon-class': iIcon }">
       <div class="title">
-        <EditImage v-if="icon" :src="icon" height="36" width="36" class="img" />
-        <h2 class="title" contenteditable="true">{{ title }}</h2>
+        <EditImage
+          v-if="iIcon"
+          :src="iIcon"
+          height="36"
+          width="36"
+          class="img"
+        />
+        <h2 class="title" contenteditable="true">{{ iTitle }}</h2>
       </div>
       <div
         class="button add"
         @click="add"
-        :class="{ 'icon-margin-right': icon }"
+        :class="{ 'icon-margin-right': iIcon }"
       >
         +
       </div>
@@ -68,22 +74,39 @@ export default {
   },
   data() {
     return {
+      iTitle: this.title,
+      iIcon: this.icon,
       arry: []
     };
   },
   methods: {
-    toJson() {
-      var json = Object.create(null);
-
-      json.title = this.title;
-      json.icon = this.icon;
-
-      this.$children.map(item => {
-        if (item["toJson"]) {
-          json = Object.assign(json, item.toJson());
-        }
+    parseFromJson(json) {
+      var _this = this;
+      this.iTitle = this.iIcon = "";
+      this.$nextTick(() => {
+        this.iTitle = json.title;
+        this.iIcon = json.icon;
       });
 
+      json.children.map((item, index) => {
+        _this.$children[index].parseFromJson(item);
+      });
+    },
+    toJson() {
+      var json = Object.create(null);
+      json.title = this.iTitle;
+      json.icon = this.iIcon;
+
+      var arr = [];
+
+      this.$children.map((item, index) => {
+        if (item["toJson"]) {
+          if (index > 0) {
+            arr.push(item.toJson());
+          }
+        }
+      });
+      json.children = arr;
       return json;
     },
     getData() {
