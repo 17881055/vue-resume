@@ -1,74 +1,89 @@
 <template>
-    <div class="edit-image" :style="{ width: width + 'px', height: height + 'px'}">
-        <img :src="imgSrc" alt="image" :class="{ circle: isCircle }" render-type="background">
-        <input type="file" accept="image/gif,image/jpeg,image/jpg,image/png" @change="changeImage">
-    </div>
+  <div
+    class="edit-image"
+    :style="{ width: width + 'px', height: height + 'px' }"
+  >
+    <img
+      :src="imgSrc"
+      alt="image"
+      :class="{ circle: isCircle }"
+      render-type="background"
+    />
+    <input
+      type="file"
+      accept="image/gif,image/jpeg,image/jpg,image/png"
+      @change="changeImage"
+    />
+  </div>
 </template>
 <script>
 export default {
-    name: 'EditImage',
-    props: {
-        width: {
-            type: String,
-            default: '36'
-        },
-        height: {
-            type: String,
-            default: '36'
-        },
-        src: {
-            type: String,
-            default: require('@/assets/social-github.png')
-        },
-        isCircle: {
-            type: Boolean,
-            default: false
-        }
+  name: "EditImage",
+  props: {
+    width: {
+      type: String,
+      default: "36"
     },
-    data () {
-        return {
-            imgSrc: this.src
-        }
+    height: {
+      type: String,
+      default: "36"
     },
-    methods: {
-        changeImage (evt) {
-            let _this = this
-            let reader = new FileReader()
-            let file = evt.target.files[0]
-            reader.readAsDataURL(file)
-            reader.onload = function (evt) {
-                _this.imgSrc = evt.target.result
-            }
-        }
+    src: {
+      type: String,
+      default: require("@/assets/social-github.png")
+    },
+    isCircle: {
+      type: Boolean,
+      default: false
     }
-}
-
+  },
+  data() {
+    return {
+      imgSrc: this.src
+    };
+  },
+  methods: {
+    toJson() {
+      var json = Object.create(null);
+      json.imgSrc = this.imgSrc;
+      return json;
+    },
+    changeImage(evt) {
+      let _this = this;
+      let reader = new FileReader();
+      let file = evt.target.files[0];
+      reader.readAsDataURL(file);
+      reader.onload = function(evt) {
+        _this.imgSrc = evt.target.result;
+      };
+    }
+  }
+};
 </script>
 <style lang="less">
 .edit-image {
-    position: relative;
+  position: relative;
+  display: inline-block;
+  z-index: 999;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  input {
     display: inline-block;
-    z-index: 999;
-
-    img {
-        width: 100%;
-        height: 100%;
-    }
-
-    input {
-        display: inline-block;
-        position: absolute;
-        cursor: pointer;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        opacity: 0;
-    }
+    position: absolute;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
 }
 
 .circle {
-    border-radius: 106px;
+  border-radius: 106px;
 }
-
 </style>
