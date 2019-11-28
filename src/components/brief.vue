@@ -50,9 +50,9 @@ export default {
       document.querySelector(".sex").innerHTML = json.sex;
       document.querySelector(".age").innerHTML = json.age;
       document.querySelector(".degree").innerHTML = json.degree;
-      this.$children.map(item => {
+      this.$children.map((item, index) => {
         if (item["parseFromJson"]) {
-          item.parseFromJson(json);
+          item.parseFromJson(json.children[index]);
         }
       });
     },
@@ -64,7 +64,7 @@ export default {
       const sex = document.querySelector(".sex").innerHTML;
       const age = document.querySelector(".age").innerHTML;
       const degree = document.querySelector(".degree").innerHTML;
-
+      json.c_name = "Brief";
       json.name = name;
       json.job = job;
       json.location = location;
@@ -72,11 +72,14 @@ export default {
       json.age = age;
       json.degree = degree;
 
-      this.$children.map(item => {
+      var arr = [];
+      this.$children.map((item, index) => {
         if (item["toJson"]) {
-          json = Object.assign(json, item.toJson());
+          arr.push(item.toJson());
         }
       });
+      json.children = arr;
+
       return json;
     }
   }

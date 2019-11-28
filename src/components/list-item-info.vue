@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     parseFromJson(json) {
+      console.log(json);
       this.dataTitle = this.dataImage = "";
       this.$nextTick(() => {
         this.dataImage = json.image;
@@ -39,6 +40,7 @@ export default {
     },
     toJson() {
       var json = Object.create(null);
+      json.c_name = "ListItemInfo";
       json.image = this.dataImage;
       json.title = this.dataTitle;
       return json;

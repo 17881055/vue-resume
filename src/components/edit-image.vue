@@ -48,6 +48,7 @@ export default {
     },
     toJson() {
       var json = Object.create(null);
+      json.c_name = "EditImage";
       json.imgSrc = this.imgSrc;
       return json;
     },

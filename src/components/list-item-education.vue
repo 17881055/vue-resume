@@ -35,6 +35,7 @@ export default {
   methods: {
     toJson() {
       var json = Object.create(null);
+      json.c_name = "ListItemEducation";
       json.school = this.school;
       json.major = this.major;
       json.date = this.date;

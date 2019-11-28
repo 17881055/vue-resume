@@ -51,6 +51,7 @@ export default {
   methods: {
     toJson() {
       var json = Object.create(null);
+      json.c_name = "ListItemSkill";
       json.percent = this.percent;
       json.title = this.title;
       return json;

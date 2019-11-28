@@ -47,6 +47,7 @@ export default {
   methods: {
     toJson() {
       var json = Object.create(null);
+      json.c_name = "ListItemExperience";
       json.company = this.company;
       json.job = this.job;
       json.date = this.date;

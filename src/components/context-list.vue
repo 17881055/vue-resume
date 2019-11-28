@@ -86,24 +86,24 @@ export default {
       this.$nextTick(() => {
         this.iTitle = json.title;
         this.iIcon = json.icon;
-      });
 
-      json.children.map((item, index) => {
-        _this.$children[index].parseFromJson(item);
+        this.$children.map((item, index) => {
+          console.log(item.$options.name);
+          if (item["parseFromJson"]) {
+            item.parseFromJson(json.children[index]);
+          }
+        });
       });
     },
     toJson() {
       var json = Object.create(null);
       json.title = this.iTitle;
       json.icon = this.iIcon;
-
+      json.c_name = "ContextList";
       var arr = [];
-
       this.$children.map((item, index) => {
         if (item["toJson"]) {
-          if (index > 0) {
-            arr.push(item.toJson());
-          }
+          if (item.toJson().c_name !== "EditImage") arr.push(item.toJson());
         }
       });
       json.children = arr;

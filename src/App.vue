@@ -174,6 +174,7 @@ export default {
         _this.$refs["brief"].parseFromJson(json.brief);
         _this.$refs["social"].parseFromJson(json.social);
         _this.$refs["contact"].parseFromJson(json.contact);
+        _this.$refs["aboutMe"].parseFromJson(json.aboutMe);
       };
     },
     importJson() {
