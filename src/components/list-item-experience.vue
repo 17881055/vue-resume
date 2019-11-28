@@ -2,13 +2,13 @@
   <ListItem class="list-item-experience">
     <div class="heading">
       <div class="company">
-        <span contenteditable="true">{{ company }}</span>
+        <span contenteditable="true">{{ dataCompany }}</span>
       </div>
       <div class="job">
-        <span contenteditable="true">{{ job }}</span>
+        <span contenteditable="true">{{ dataJob }}</span>
       </div>
       <div class="date">
-        <span contenteditable="true">{{ date }}</span>
+        <span contenteditable="true">{{ dataTime }}</span>
       </div>
     </div>
     <p contenteditable="true" ref="text">
@@ -44,13 +44,26 @@ export default {
       default: "2011.9 - 2015.6"
     }
   },
+  data() {
+    return {
+      dataCompany: this.company,
+      dataTime: this.date,
+      dataJob: this.job
+    };
+  },
   methods: {
+    parseFromJson(json) {
+      this.dataJob = json.job;
+      this.dataCompany = json.company;
+      this.dataTime = json.date;
+      this.$refs["text"].innerHTML = json.text;
+    },
     toJson() {
       var json = Object.create(null);
       json.c_name = "ListItemExperience";
-      json.company = this.company;
-      json.job = this.job;
-      json.date = this.date;
+      json.company = this.dataCompany;
+      json.job = this.dataJob;
+      json.date = this.dataTime;
       json.text = this.$refs["text"].innerHTML;
       return json;
     }

@@ -44,6 +44,7 @@ export default {
   },
   methods: {
     parseFromJson(json) {
+      console.log("----", json);
       this.imgSrc = json.imgSrc;
     },
     toJson() {

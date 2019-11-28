@@ -1,13 +1,13 @@
 <template>
   <ListItem class="list-item-education">
     <div class="school">
-      <span contenteditable="true">{{ school }}</span>
+      <span contenteditable="true">{{ dataSchool }}</span>
     </div>
     <div class="major">
-      <span contenteditable="true">{{ major }}</span>
+      <span contenteditable="true">{{ dataMajor }}</span>
     </div>
     <div class="date">
-      <span contenteditable="true">{{ date }}</span>
+      <span contenteditable="true">{{ dataTime }}</span>
     </div>
   </ListItem>
 </template>
@@ -32,13 +32,25 @@ export default {
       default: "2011.9 - 2015.6"
     }
   },
+  data() {
+    return {
+      dataSchool: this.school,
+      dataTime: this.date,
+      dataMajor: this.major
+    };
+  },
   methods: {
+    parseFromJson(json) {
+      this.dataSchool = json.school;
+      this.dataMajor = json.major;
+      this.dataTime = json.date;
+    },
     toJson() {
       var json = Object.create(null);
       json.c_name = "ListItemEducation";
-      json.school = this.school;
-      json.major = this.major;
-      json.date = this.date;
+      json.school = this.dataSchool;
+      json.major = this.dataMajor;
+      json.date = this.dataTime;
       return json;
     }
   }

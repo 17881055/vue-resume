@@ -1,5 +1,5 @@
 <template>
-  <ListItem class="list-item-info">
+  <ListItem class="list-item-info" v-if="reset">
     <EditImage :src="dataImage" class="img"></EditImage>
     <span contenteditable="true">{{ dataTitle }}</span>
   </ListItem>
@@ -25,17 +25,22 @@ export default {
   },
   data() {
     return {
+      reset: true,
       dataTitle: this.title,
       dataImage: this.image
     };
   },
   methods: {
     parseFromJson(json) {
-      console.log(json);
+      this.reset = false;
       this.dataTitle = this.dataImage = "";
       this.$nextTick(() => {
-        this.dataImage = json.image;
-        this.dataTitle = json.title;
+        console.log("json", json);
+        if (json) {
+          this.reset = true;
+          this.dataImage = json.image;
+          this.dataTitle = json.title;
+        }
       });
     },
     toJson() {

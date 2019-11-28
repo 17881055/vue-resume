@@ -49,11 +49,15 @@ export default {
     }
   },
   methods: {
+    parseFromJson(json) {
+      this.dataPercent = json.percent;
+      this.dataTitle = json.title;
+    },
     toJson() {
       var json = Object.create(null);
       json.c_name = "ListItemSkill";
-      json.percent = this.percent;
-      json.title = this.title;
+      json.percent = this.dataPercent;
+      json.title = this.dataTitle;
       return json;
     }
   }

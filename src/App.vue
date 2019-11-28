@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <div class="resume">
+    <div class="resume clearfloat">
       <div class="left">
         <Brief ref="brief" />
         <ContextList
@@ -120,6 +120,7 @@
     </div>
     <div class="action-save">
       <input
+        accept=".json"
         type="file"
         style="display:none"
         @change="handleChangeFile"
@@ -170,11 +171,15 @@ export default {
       reader.readAsText(selectedFile);
       var _this = this;
       reader.onload = function() {
+        _this.$refs.fileInput.value = null;
         let json = JSON.parse(this.result);
         _this.$refs["brief"].parseFromJson(json.brief);
-        _this.$refs["social"].parseFromJson(json.social);
-        _this.$refs["contact"].parseFromJson(json.contact);
+        _this.$refs["social"].parseFromJson(json.social, "social");
+        _this.$refs["contact"].parseFromJson(json.contact, "contact");
         _this.$refs["aboutMe"].parseFromJson(json.aboutMe);
+        _this.$refs["skill"].parseFromJson(json.skill);
+        _this.$refs["education"].parseFromJson(json.education);
+        _this.$refs["workingExperience"].parseFromJson(json.workingExperience);
       };
     },
     importJson() {
@@ -228,6 +233,17 @@ p {
   margin: 0 0 12px 0;
 }
 
+.clearfloat:after {
+  display: block;
+  clear: both;
+  content: "";
+  visibility: hidden;
+  height: 0;
+}
+.clearfloat {
+  zoom: 1;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -243,7 +259,7 @@ p {
 
   .resume {
     width: 1247px;
-    height: 1754px;
+    min-height: 1754px;
     border: 1px solid #dad8d7;
     background-color: white;
     overflow: hidden;

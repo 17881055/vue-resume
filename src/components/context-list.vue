@@ -80,15 +80,32 @@ export default {
     };
   },
   methods: {
-    parseFromJson(json) {
+    parseFromJson(json, moduleName) {
       var _this = this;
       this.iTitle = this.iIcon = "";
+      console.log(json);
+      var length = this.$children.length;
+      switch (moduleName) {
+        case "social":
+        case "contact":
+          length--;
+          break;
+        default:
+          break;
+      }
+      json.children.map((item, index) => {
+        console.log(index, length);
+        if (index >= length) {
+          _this.add();
+        }
+      });
+
       this.$nextTick(() => {
         this.iTitle = json.title;
         this.iIcon = json.icon;
 
         this.$children.map((item, index) => {
-          console.log(item.$options.name);
+          console.log(json.children[index], index, this.$children.length);
           if (item["parseFromJson"]) {
             item.parseFromJson(json.children[index]);
           }
