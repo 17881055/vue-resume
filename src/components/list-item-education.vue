@@ -75,6 +75,7 @@ export default {
   .date {
     width: 25%;
     text-align: right;
+    padding: 0 10px 0 0;
   }
 }
 </style>

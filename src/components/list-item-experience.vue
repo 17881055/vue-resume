@@ -84,11 +84,11 @@ export default {
     }
 
     .job {
-      width: 35%;
+      width: 34%;
     }
 
     .date {
-      width: 25%;
+      width: 29%;
       text-align: right;
     }
   }

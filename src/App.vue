@@ -132,11 +132,21 @@
       <button @click="importJson">Import Json</button>
     </div>
     <div class="footer">
-      <a href="https://github.com/luosijie/vue-resume" target="_blank">
-        <img src="./assets/social-github.png" height="36" width="36" alt />
-      </a>
-      vue-resume designed by
-      <a href="https://github.com/luosijie">Jesse Luo</a>
+      <div class="left">
+        <a href="https://github.com/luosijie/vue-resume" target="_blank">
+          <img src="./assets/social-github.png" height="36" width="36" alt />
+        </a>
+        vue-resume designed by
+        <a href="https://github.com/luosijie">Jesse Luo</a>
+      </div>
+
+      <div class="right">
+        <a href="https://github.com/17881055/vue-resume" target="_blank">
+          <img src="./assets/social-github.png" height="36" width="36" alt />
+        </a>
+        powered by
+        <a href="https://github.com/17881055">Ethan Cen</a>
+      </div>
     </div>
   </div>
 </template>
@@ -353,6 +363,19 @@ p {
         line-height: 0;
         margin-top: 15px;
       }
+    }
+
+    .left {
+      height: 100%;
+      padding: 50px 40px;
+      box-sizing: border-box;
+      float: left;
+    }
+
+    .right {
+      box-sizing: border-box;
+      float: left;
+      padding: 50px 40px;
     }
   }
 }
