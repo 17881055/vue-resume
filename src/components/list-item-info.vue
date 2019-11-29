@@ -35,7 +35,6 @@ export default {
       this.reset = false;
       this.dataTitle = this.dataImage = "";
       this.$nextTick(() => {
-        console.log("json", json);
         if (json) {
           this.reset = true;
           this.dataImage = json.image;
